@@ -81,6 +81,15 @@ app.get("/api/smashes", (req, res) => {
   res.json({ smashes });
 });
 
+// POST /api/smash/reset -> reset counter to zero
+app.post("/api/smash/reset", (req, res) => {
+  smashes = 0;
+  res.json({ 
+    smashes: smashes,
+    message: "Counter reset to zero!"
+  });
+});
+
 // GET /api/secret?code=411L -> hidden message if code is correct
 app.get("/api/secret", (req, res) => {
   const code = req.query.code;
