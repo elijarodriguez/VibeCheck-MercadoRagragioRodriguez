@@ -14,7 +14,7 @@ function formatResponse(type, data) {
                 <div class="response-card fortune">
                     <div class="response-header">
                         <div class="response-icon fortune">
-                            <i class="fas fa-crystal-ball"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                         <div>
                             <h3 class="response-title">Fortune</h3>
