@@ -92,7 +92,20 @@ app.get("/api/secret", (req, res) => {
   res.status(403).json({ message: "Nope 😄 Try code=411L" });
 });
 
+app.get("/api/ping", (req, res) => {
+  res.json({ message: "pong", success: true });
+});
+
+app.get("/api/status", (req, res) => {
+  res.json({ 
+    server: "VibeCheck API",
+    version: "1.0.0",
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`VibeCheck API running at http://localhost:${PORT}`);
 });
+
