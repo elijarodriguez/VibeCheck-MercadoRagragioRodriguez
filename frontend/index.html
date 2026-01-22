@@ -1,29 +1,81 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VibeCheck 411L</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VibeCheck 411L</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <h1>VibeCheck 411L</h1>
-  <p>Click buttons. This page will fetch data from your Node.js API.</p>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-star"></i> VibeCheck 411L</h1>
+            <p class="subtitle">Check your coding vibe. Get fortunes, jokes, and smash away the stress!</p>
+        </div>
 
-  <div>
-    <button id="btnFortune">🔮 Fortune</button>
-    <button id="btnJoke">😂 Joke</button>
-    <button data-mood="happy" class="btnMood">😄 Happy</button>
-    <button data-mood="tired" class="btnMood">🥱 Tired</button>
-    <button data-mood="stressed" class="btnMood">😵‍💫 Stressed</button>
-    <button id="btnSmash">💥 SMASH!</button>
-    <button id="btnReset">🔄 Reset Counter</button>
-    <button id="btnSecret">🕵️ Secret</button>
-  </div>
+        <div class="button-grid">
+            <button id="btnFortune" class="btn">
+                <i class="fas fa-crystal-ball"></i> Get Fortune
+            </button>
 
-  <h2>Output</h2>
-  <pre id="out">Ready...</pre>
+            <button id="btnJoke" class="btn">
+                <i class="fas fa-laugh-beam"></i> Get Joke
+            </button>
 
-  <script src="app.js"></script>
+            <button data-mood="happy" class="btn btnMood">
+                <i class="fas fa-smile"></i> Happy Vibe
+            </button>
+
+            <button data-mood="tired" class="btn btnMood">
+                <i class="fas fa-bed"></i> Tired Vibe
+            </button>
+
+            <button data-mood="stressed" class="btn btnMood">
+                <i class="fas fa-flushed"></i> Stressed Vibe
+            </button>
+
+            <button id="btnSmash" class="btn">
+                <i class="fas fa-bomb"></i> SMASH!
+            </button>
+
+            <button id="btnReset" class="btn">
+                <i class="fas fa-redo"></i> Reset Counter
+            </button>
+
+            <button id="btnSecret" class="btn">
+                <i class="fas fa-key"></i> Get Secret
+            </button>
+        </div>
+
+        <div class="output-section">
+            <h2><i class="fas fa-code"></i> API Response</h2>
+            <div class="output-container">
+                <div id="out">
+                    <div class="empty-state">
+                        <i class="fas fa-sparkles"></i>
+                        <h3>Ready for Good Vibes!</h3>
+                        <p>Click any button to see beautiful responses here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="smash-counter">
+                <i class="fas fa-fire"></i>
+                <span>Total Smashes: <span id="smashCount">0</span></span>
+            </div>
+            <div class="server-status">
+                <i class="fas fa-server"></i>
+                <span id="serverStatus">API: Online</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
+
 </html>
