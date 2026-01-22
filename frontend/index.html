@@ -7,6 +7,391 @@
     <title>VibeCheck 411L</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* VibeCheck 411L - Modern Compact Design */
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #4cd964;
+            --warning: #ff9500;
+            --danger: #ff3b30;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Button Grid */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 16px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Specific Button Colors */
+        #btnFortune {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+        }
+
+        #btnJoke {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+        }
+
+        #btnSmash {
+            background: linear-gradient(45deg, #FFD166, #FFA166);
+        }
+
+        #btnReset {
+            background: linear-gradient(45deg, #06D6A0, #1B9AAA);
+        }
+
+        #btnSecret {
+            background: linear-gradient(45deg, #118AB2, #073B4C);
+        }
+
+        .btnMood[data-mood="happy"] {
+            background: linear-gradient(45deg, #FFD166, #FFA166);
+        }
+
+        .btnMood[data-mood="tired"] {
+            background: linear-gradient(45deg, #118AB2, #073B4C);
+        }
+
+        .btnMood[data-mood="stressed"] {
+            background: linear-gradient(45deg, #EF476F, #FF6B6B);
+        }
+
+        /* Output Section */
+        .output-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .output-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+
+        .output-container {
+            min-height: 120px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* Custom scrollbar */
+        .output-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .output-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .output-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .output-container::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Compact Response Cards */
+        .response-card {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .response-card.fortune { border-left-color: #FF6B6B; }
+        .response-card.joke { border-left-color: #4ECDC4; }
+        .response-card.vibe { border-left-color: #667eea; }
+        .response-card.smash { border-left-color: #FFD166; }
+        .response-card.secret { border-left-color: #118AB2; }
+        .response-card.error { border-left-color: #EF476F; }
+
+        .response-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .response-icon {
+            font-size: 16px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .response-icon.fortune { background: linear-gradient(45deg, #FF6B6B, #FF8E53); }
+        .response-icon.joke { background: linear-gradient(45deg, #4ECDC4, #44A08D); }
+        .response-icon.vibe { background: linear-gradient(45deg, #667eea, #764ba2); }
+        .response-icon.smash { background: linear-gradient(45deg, #FFD166, #FFA166); }
+        .response-icon.secret { background: linear-gradient(45deg, #118AB2, #073B4C); }
+
+        .response-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .response-subtitle {
+            color: #888;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .response-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #444;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .response-meta {
+            display: flex;
+            gap: 12px;
+            color: #999;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .response-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Compact Vibe Response */
+        .vibe-response {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .vibe-emoji {
+            font-size: 2rem;
+            min-width: 55px;
+            text-align: center;
+        }
+
+        .vibe-message {
+            flex: 1;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 25px 15px;
+            color: #aaa;
+        }
+
+        .empty-state i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #777;
+        }
+
+        .empty-state p {
+            font-size: 0.85rem;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .smash-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        /* Vibe-specific animations */
+        @keyframes vibePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .vibe-active {
+            animation: vibePulse 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 14px 16px;
+            }
+            
+            .output-container {
+                max-height: 300px;
+            }
+            
+            .response-card {
+                padding: 15px;
+            }
+            
+            .response-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .vibe-emoji {
+                font-size: 1.8rem;
+                min-width: 45px;
+            }
+        }
+    </style>
 </head>
 
 <body>
