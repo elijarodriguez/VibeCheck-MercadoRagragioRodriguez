@@ -1,3 +1,4 @@
+// Simple VibeCheck Frontend
 const API_BASE = "http://localhost:3000";
 const out = document.getElementById("out");
 const smashCount = document.getElementById("smashCount");
